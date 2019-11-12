@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件与持久化接口通过nameSpace属性进行关联， -->
+<mapper namespace="com.bdqn.dao.AddressDao">
+	<resultMap type="Address" id="addressMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="detailSite" property="detailSite" />
+		<result column="postcode" property="postcode" />
+		<association property="province" column="provinceId"
+			select="com.bdqn.dao.ProvinceDao.findById">
+		</association>
+		<association property="city" column="cityId"
+			select="com.bdqn.dao.CityDao.findById">
+		</association>
+		<association property="county" column="countyId"
+			select="com.bdqn.dao.CountyDao.findById">
+		</association>
+		<association property="region" column="regionId"
+			select="com.bdqn.dao.RegionDao.findById">
+		</association>
+	</resultMap>
+	<select id="findById" parameterType="int" resultMap="addressMap">
+		select * from address where id= #{id}
+	</select>
+	<select id="find" resultMap="addressMap">
+		select * from address
+	</select>
+</mapper> 
