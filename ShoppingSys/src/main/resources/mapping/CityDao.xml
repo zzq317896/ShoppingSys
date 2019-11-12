@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 映射文件与持久化接口通过nameSpace属性进行关联，-->
 <mapper namespace="com.bdqn.dao.CityDao">
  	<select id="find" resultType="City">
- 	  select * from new_category
+ 	  select * from city
  	</select>
  	<select id="findById" parameterType="int" resultType="City">
- 	  select * from new_category where id = #{id}
+ 	  select * from city where id = #{id}
  	</select>
 </mapper> 

@@ -3,36 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 映射文件与持久化接口通过nameSpace属性进行关联， -->
-<mapper namespace="com.bdqn.dao.NewDetailDao">
-	<resultMap type="NewDetail" id="newMap">
-		<id column="id" property="id" />
-		<result column="title" property="title" />
-		<result column="summary" property="summary" />
-		<result column="author" property="author" />
-		<result column="createdate" property="createdate" />
-		<association property="newCategory" column="categoryId"
-			select="com.bdqn.dao.NewCategoryDao.findById"></association>
-	</resultMap>
-
-	<select id="findById" parameterType="int" resultMap="newMap">
-		select * from new_dateil where id= #{id}
+<mapper namespace="com.bdqn.dao.ProvinceDao">
+	
+	<select id="findById" parameterType="int" resultType="Province">
+		select * from Province where id= #{id}
 	</select>
-	<select id="getCount" parameterType="map" resultType="int">
-	   select count(1) from new_dateil 
-	   <if test="categoryId!=null">
-	     where categoryId=#{categoryId}
-	   </if> 
+	<select id="find"  resultType="Province">
+		select * from Province
 	</select>
-	<select id="findPage" parameterType="map" resultMap="newMap">
-		select * from new_dateil
-		<where>
-			<if test="categoryId!=null">
-		        categoryId=#{categoryId}
-		    </if>
-	    </where>
-		limit #{begin},#{end}
-	</select>
-	<update id="update" >
-		update new_dateil set title=#{title},summary=#{summary},author=#{author} where id=#{id}
-	</update>
 </mapper> 
