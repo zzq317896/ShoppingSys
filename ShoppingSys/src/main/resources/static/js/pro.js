@@ -65,7 +65,8 @@ $(function(){
 	$(".btns a").click(function(){
 		if($(".categ p").hasClass("on")){
 			if($(this).children().hasClass("buy")){
-				$(this).attr("href","order.html");
+				var num=$("#num").text();
+				$(this).attr("href","order?num="+num+"");
 			}
 			$(".proIntro").css("border","none");
 			$(".num .please").hide();
@@ -112,7 +113,7 @@ $(function(){
 		seconds--;
 		$(".ok span").text(seconds);
 		if(seconds==0){
-			window.location.href=("myorderq.html")
+			window.location.href=("myorderq")
 		}
 	}
 	setInterval(time,1000);
