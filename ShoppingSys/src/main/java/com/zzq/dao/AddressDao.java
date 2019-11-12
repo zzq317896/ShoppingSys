@@ -14,7 +14,7 @@ import com.zzq.entity.Address;
 @Mapper
 public interface AddressDao {
 	public List<Address> find();
-	public Address findById();
+	public Address findById(int id);
 	public int add(Address address);
 	public int delete(int id);
 	public int update(Map map);

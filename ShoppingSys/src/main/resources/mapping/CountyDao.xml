@@ -3,12 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 映射文件与持久化接口通过nameSpace属性进行关联， -->
-<mapper namespace="com.bdqn.dao.CountyDao">
+<mapper namespace="com.zzq.dao.CountyDao">
 	<resultMap type="County" id="countyMap">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
 		<association property="city" column="cityId"
-			select="com.bdqn.dao.CityDao.findById"></association>
+			select="com.zzq.dao.CityDao.findById"></association>
 	</resultMap>
 
 	<select id="findById" parameterType="int" resultMap="countyMap">

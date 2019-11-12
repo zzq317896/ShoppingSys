@@ -137,11 +137,16 @@
 							<a href="#2" id="addxad"><img src="img/jia.png"/></a>
 							<span>添加新地址</span>
 						</div>
-						<div id="dizhi">
-							<p>六六六</p>
-							<p>1573****666</p>
-							<p>河北省 唐山市 路北区</p>
-							<p>唐山市大学生公寓村（063000）</p>
+						<div th:each="a:${address}" id="dizhi">
+							<p th:text="${a.name}"></p>
+							<p th:text="${a.phone}"></p>
+							<p><span th:text="${a.province.name}"></span>  
+							<span th:text="${a.city.name}"></span>
+							<span th:text="${a.county.name}"></span>
+							<span th:text="${a.region.name}"></span>
+							</p>
+							<p><span th:text="${a.detailSite}"></span>
+							(<span th:text="${a.postcode}"></span>)</p>
 						</div>
 					</div>		
 				</div>
@@ -151,27 +156,35 @@
 		<!--遮罩-->
 		<div class="mask"></div>
 		<div class="adddz">
-			<form action="#" method="get">
-				<input type="text" placeholder="姓名" class="on" />
-				<input type="text" placeholder="手机号" />
+			<form action="@{save}" method="get">
+				<input type="text" placeholder="姓名" class="on" name="name"/>
+				<input type="text" placeholder="手机号" name="phone"/>
 				<div class="city">
-					<select name="">
-						<option value="省份/自治区">省份/自治区</option>
+					<select name="pro">
+						<option value="0">省份/自治区</option>
+						<option th:each="p:${pro}" th:selected="${p.id==pro}"
+					th:value="${p.id}" th:text="${p.name}"></option>
 					</select>
-					<select>
-						<option value="城市/地区">城市/地区</option>
+					<select name="city">
+						<option value="0">城市/地区</option>
+						<option th:each="c:${city}" th:selected="${c.id==city}"
+					th:value="${c.id}" th:text="${c.name}"></option>
 					</select>
-					<select>
-						<option value="区/县">区/县</option>
+					<select name="county">
+						<option value="0">区/县</option>
+						<option th:each="county:${county}" th:selected="${county.id==county}"
+						th:value="${county.id}" th:text="${county.name}"></option>
 					</select>
-					<select>
-						<option value="配送区域">配送区域</option>
+					<select name="region">
+						<option value="0">配送区域</option>
+						<option th:each="r:${region}" th:selected="${r.id==region}"
+						th:value="${r.id}" th:text="${r.name}"></option>
 					</select>
 				</div>
-				<textarea name="" rows="" cols="" placeholder="详细地址"></textarea>
-				<input type="text" placeholder="邮政编码" />
+				<textarea  rows="" cols="" placeholder="详细地址" name="detailSite"></textarea>
+				<input type="text" placeholder="邮政编码" name="postcode"/>
 				<div class="bc">
-					<input type="button" value="保存" />
+					<input type="submit" value="保存" />
 					<input type="button" value="取消" />
 				</div>
 			</form>
