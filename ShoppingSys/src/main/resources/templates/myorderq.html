@@ -109,7 +109,7 @@
 				<div class="zuo fl">
 					<h3>
 						<a href="#"><img src="img/tx.png"/></a>
-						<p class="clearfix"><span class="fl">[羊羊羊]</span><span class="fr">[退出登录]</span></p>
+						<p class="clearfix"><span class="fl">[张自权]</span><span class="fr">[退出登录]</span></p>
 					</h3>
 					<div>
 						<h4>我的交易</h4>
@@ -137,37 +137,17 @@
 					</div>
 					<div class="dlist clearfix">
 						<ul class="fl clearfix" id="wa">
-							<li class="on"><a href="#2">全部有效订单</a></li>
+							<li class="on"><a href="myorderq">全部有效订单</a></li>
 							<li><a href="#2">待支付</a></li>
 							<li><a href="#2l">待收货</a></li>
 							<li><a href="#2">已关闭</a></li>
 						</ul>
-						<form action="#" method="get" class="fr clearfix">
-							<input type="text" name="" id="" value="" placeholder="请输入商品名称、订单号" />
-							<input type="button" name="" id="" value="" />
+						<form th:action="@{myorderq}" method="post" class="fr clearfix">
+							<input type="text" name="orderId"  placeholder="请输入商品订单号" />
+							<input type="submit" id="" value="" />
 						</form>
 					</div>
-					<div class="dkuang">
-						<p class="one">已收货</p>
-						<div class="word clearfix">
-							<ul class="fl clearfix">
-								<li>2016年12月1日 18:53</li>
-								<li>杨小黄</li>
-								<li>订单号:5160513358520018</li>
-								<li>在线支付</li>
-							</ul>
-							<p class="fr">订单金额：<span>99.00</span>元</p>
-						</div>
-						<div class="shohou clearfix">
-							<a href="#" class="fl"><img src="img/g1.jpg"/></a>
-							<p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
-							<p class="fr">
-								<a href="myprod.html">待评价</a>
-								<a href="orderxq.html">订单详情</a>
-							</p>
-						</div>
-					</div>
-					<div class="dkuang clearfix deng">
+					<div class="dkuang clearfix deng" th:each="g : ${list}">
 						<p class="one fl">待收货</p>
 						<div  class="clearfix">
 							<div class="fl vewwl">
@@ -177,15 +157,15 @@
 									<ul>
 										<li>
 											<p>妥投投递并签收，已签收。签收人：本人签收</p>
-											<p>2016-12-03 17:30:00</p>
+											<p>2019-11-12 17:30:00</p>
 										</li>
 										<li>
-											<p>深圳市南油速递营销部安排投递（投递员姓名：六六六。联系电话：14243452522;</p>
-											<p>2016-12-03 08:50:00</p>
+											<p>深圳市南油速递营销部安排投递（投递员姓名：张晓丽。联系电话：14243452522;</p>
+											<p>2019-11-14 08:50:00</p>
 										</li>
 										<li>
 											<p>到达广东省邮政速递物流有限公司深圳航空邮件处理中心处理中心（经转）</p>
-											<p>2016-12-03 02:20:00</p>
+											<p>2019-11-16 02:20:00</p>
 										</li>
 										<li>以上为最新跟踪信息<a href="wuliu.html">查看全部</a></li>
 									</ul>
@@ -194,59 +174,19 @@
 						</div>
 						<div class="word clearfix">
 							<ul class="fl clearfix">
-								<li>2016年12月1日 18:53</li>
-								<li>杨小黄</li>
-								<li>订单号:5160513358520018</li>
+								<li id="time" th:text="${g.createTime}"></li>
+								<li>张自权</li>
+								<li>订单号:<span th:text="${g.orderId}">5160513358520018</span></li>
 								<li>在线支付</li>
 							</ul>
-							<p class="fr">订单金额：<span>99.00</span>元</p>
+							<p class="fr">订单金额：<span th:text="${g.totalAcount}">688.00</span>元</p>
 						</div>
 						<div class="shohou clearfix">
 							<a href="#" class="fl"><img src="img/g1.jpg"/></a>
-							<p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
+							<p class="fl"><a href="#">非洲菊仿真花干花</a><a href="#">¥688.00×<span th:text="${num}"></span></a></p>
 							<p class="fr">
-								<a href="#">确认收货</a>
-								<a href="orderxq.html">订单详情</a>
-							</p>
-						</div>
-					</div>
-					<div class="dkuang deng">
-						<p class="one">待支付</p>
-						<div class="word clearfix">
-							<ul class="fl clearfix">
-								<li>2016年12月1日 18:53</li>
-								<li>杨小黄</li>
-								<li>订单号:5160513358520018</li>
-								<li>在线支付</li>
-							</ul>
-							<p class="fr">订单金额：<span>99.00</span>元</p>
-						</div>
-						<div class="shohou clearfix">
-							<a href="#" class="fl"><img src="img/g1.jpg"/></a>
-							<p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
-							<p class="fr">
-								<a href="#">立即支付</a>
-								<a href="orderxq.html">订单详情</a>
-							</p>
-						</div>
-					</div>
-					<div class="dkuang">
-						<p class="one">已关闭</p>
-						<div class="word clearfix">
-							<ul class="fl clearfix">
-								<li>2016年12月1日 18:53</li>
-								<li>杨小黄</li>
-								<li>订单号:5160513358520018</li>
-								<li>在线支付</li>
-							</ul>
-							<p class="fr">订单金额：<span>99.00</span>元</p>
-						</div>
-						<div class="shohou clearfix">
-							<a href="#" class="fl"><img src="img/g1.jpg"/></a>
-							<p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
-							<p class="fr">
-								<a href="#">交易失败</a>
-								<a href="orderxq.html">订单详情</a>
+								<a th:href="@{update(orderIds=${g.orderId})}">确认收货</a>
+								<a href="orderxq">订单详情</a>
 							</p>
 						</div>
 					</div>
@@ -263,25 +203,25 @@
 			<a href="cart.html">
 			<dl>
 				<dt><img src="img/gt1.png"/></dt>
-				<dd>去购<br />物车</dd>
+				<dd>去购<br/>物车</dd>
 			</dl>
 			</a>
 			<a href="#" class="dh">
 			<dl>
 				<dt><img src="img/gt2.png"/></dt>
-				<dd>联系<br />客服</dd>
+				<dd>联系<br/>客服</dd>
 			</dl>
 			</a>
 			<a href="mygxin.html">
 			<dl>
 				<dt><img src="img/gt3.png"/></dt>
-				<dd>个人<br />中心</dd>
+				<dd>个人<br/>中心</dd>
 			</dl>
 			</a>
 			<a href="#" class="toptop" style="display: none">
 			<dl>
 				<dt><img src="img/gt4.png"/></dt>
-				<dd>返回<br />顶部</dd>
+				<dd>返回<br/>顶部</dd>
 			</dl>
 			</a>
 			<p>400-800-8200</p>

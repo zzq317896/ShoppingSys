@@ -110,7 +110,7 @@
 					<div class="addres clearfix">
 						<div class="addre fl on">
 							<div class="tit clearfix">
-								<p class="fl">张三1
+								<p class="fl">张自权
 									<span class="default">[默认地址]</span>
 								</p>
 								<p class="fr">
@@ -120,24 +120,7 @@
 								</p>
 							</div>
 							<div class="addCon">
-								<p>河北省&nbsp;唐山市&nbsp;路北区&nbsp;大学生公寓村</p>
-								<p>15732570937</p>
-							</div>
-						</div>
-						<div class="addre fl">
-							<div class="tit clearfix">
-								<p class="fl">张三2
-								</p>
-								<p class="fr">
-									<a href="#" class="setDefault">设为默认</a>
-									<span>|</span>
-									<a href="#">删除</a>
-									<span>|</span>
-									<a href="#" class="edit">编辑</a>
-								</p>
-							</div>
-							<div class="addCon">
-								<p>河北省&nbsp;唐山市&nbsp;路北区&nbsp;大学生公寓村</p>
+								<p>湖南省&nbsp;长沙市&nbsp;岳麓区&nbsp;杜鹃路772号</p>
 								<p>15732570937</p>
 							</div>
 						</div>
@@ -159,6 +142,7 @@
 						<span>中通快递</span>
 					</div>
 				</div>
+				<form th:action="@{ok(num=${num})}" method="post">
 				<div class="orderR fr">
 					<div class="msg">
 						<h3>订单内容<a href="cart.html" class="fr">返回购物车</a></h3>
@@ -170,26 +154,45 @@
 							<li class="fl">
 								<p>非洲菊仿真干花</p>
 								<p>颜色分类：白色</p>
-								<p>数量：1</p>
+								<p>数量：<span th:text="${num}" id="num"></span></p>
 							</li>
-							<li class="fr">￥688.00</li>
+							<li class="fr">￥1376.00</li>
 						</ul>
 					</div>
 					<!--------tips---------------->
 					<div class="tips">
-						<p><span class="fl">商品金额：</span><span class="fr">￥<span>688.00</span></span></p>
+						<p><span class="fl">商品金额：</span><span class="fr">￥<input type="text" id="price" name="payAmount" value="1376.00"></span></p>
 						<p><span class="fl">优惠金额：</span><span class="fr">￥0.00</span></p>
-						<p><span class="fl">运费：</span><span class="fr">￥<span>10.00</span></span></p>
+						<p><span class="fl">运费：</span><span class="fr">￥<input type="text" name="feightAcount" value="10.00"></span></p>
 					</div>
 					<!--------tips count---------------->
 					<div class="count tips">
-						<p><span class="fl">合计：</span><span class="fr">￥<span>698.00</span></span></p>
+						<p><span class="fl">合计：</span><span class="fr">￥<input type="text" id="all" name="totalAcount"/></span></p>
 					</div>
-					<!--<input type="button" name="" value="去支付"> -->
-					<a href="ok.html" class="pay">去支付</a>
+					<input type="hidden" id="orderId" name="orderId"/>
+					<input type="submit" value="去支付" class="pay"/>
 				</div>
+				</form>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+		<script type="text/javascript">
+			function cal(){
+				var num=$("#num").text();
+				var price=$("#price").val();
+				$("#all").val((num*price)+10)
+			}
+			$(function(){
+				cal();
+				var datetime=new Date();
+				var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+				var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+				var h = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+				var m = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+				var year=datetime.getFullYear();
+				$("#orderId").val("N"+year+month+date+h+m);
+			})
+		</script>
 		<!--编辑弹框-->
 		<!--遮罩-->
 		<div class="mask"></div>

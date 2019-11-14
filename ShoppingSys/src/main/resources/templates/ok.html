@@ -96,10 +96,11 @@
 			<div class="site">
 				<p class="wrapper clearfix">
 					<span class="fl">支付成功</span>
+					<span th:text="${num}" style="display:none" id="num"></span>
 					<img class="top" src="img/temp/cartTop03.png">
 				</p>
 			</div>
-			<p class="ok">支付成功！剩余<span>5</span>秒<a href="myorderq.html">返回订单页</a></p>
+			<p class="ok">支付成功！剩余<span>5</span>秒<a th:href="@{myorderq}">返回订单页</a></p>
 		</div>
 		<div class="like">
 			<h4>猜你喜欢</h4>
