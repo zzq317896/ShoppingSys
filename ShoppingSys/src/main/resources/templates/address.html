@@ -197,7 +197,7 @@
 			</form>
 		</div>
 		<div class="readd">
-			<form th:action="@{update}" method="get" th:each="add:${addById}">
+			<form th:action="@{update}" method="get">
 				<input type="text"  th:value="${add.name}" name="name" class="on"/>
 				<input type="text" th:value="${add.phone}" name="phone"/>
 				<div class="city">
