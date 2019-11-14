@@ -1,8 +1,18 @@
 package com.zzq.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.zzq.entity.Order;
+import com.zzq.service.OrderService;
 
 /**
  * 订单控制层
@@ -12,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class OrderController {
+	@Autowired
+	OrderService oService;
 	/**
 	 * 跳转到商品详情页面
 	 * @return
@@ -34,7 +46,9 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("ok")
-	public String pay() {
+	public String pay(String num,Model model,Order order) {
+		oService.addOrder(order);
+		model.addAttribute("num",num);
 		return "ok";
 	}
 	/**
@@ -42,7 +56,10 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("myorderq")
-	public String sucess() {
+	public String sucess(String num,Model model,String orderId) {
+		List<Order> list=oService.getAll(orderId);
+		model.addAttribute("num",num);
+		model.addAttribute("list",list);
 		return "myorderq";
 	}
 	/**
@@ -52,5 +69,11 @@ public class OrderController {
 	@RequestMapping("orderxq")
 	public String detail() {
 		return "orderxq";
+	}
+	@RequestMapping("update")
+	public String update(String orderIds,Model model) {
+		oService.update(orderIds);
+		model.addAttribute("info", "已收货");
+		return "forward:myorderq";
 	}
 }

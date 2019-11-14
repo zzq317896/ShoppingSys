@@ -9,7 +9,7 @@ public class Order {
 	private int id;//订单id
 	private String orderId;//订单编号
 	private String createTime;//下单时间
-	private int userId;//用户id
+	private int  userId;//用户id
 	private double totalAcount;//总金额
 	private double feightAcount;//运费
 	private double payAmount;//实付金额
