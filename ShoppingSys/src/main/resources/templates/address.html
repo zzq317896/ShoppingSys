@@ -137,11 +137,23 @@
 							<a href="#2" id="addxad"><img src="img/jia.png"/></a>
 							<span>添加新地址</span>
 						</div>
-						<div id="dizhi">
-							<p>六六六</p>
-							<p>1573****666</p>
-							<p>河北省 唐山市 路北区</p>
-							<p>唐山市大学生公寓村（063000）</p>
+						<div th:each="a:${address}" id="dizhi">
+							<p th:text="${a.name}">六六六</p>
+							<p th:text="${a.phone}">1573****666</p>
+							<p>
+								<span th:text="${a.province.name}"></span>
+								<span th:text="${a.city.name}"></span>
+								<span th:text="${a.county.name}"></span>
+								<span th:text="${a.region.name}"></span>
+							</p>
+							<p>
+								<span th:text="${a.detailSite}"></span>
+								(<span th:text="${a.postcode}"></span>)
+							</p>
+							<p>
+								<a th:href="@{info(id=${a.id})}">修改</a>
+								<a th:href="@{delete(id=${a.id})}">删除</a>
+							</p>
 						</div>
 					</div>		
 				</div>
@@ -151,51 +163,67 @@
 		<!--遮罩-->
 		<div class="mask"></div>
 		<div class="adddz">
-			<form action="#" method="get">
-				<input type="text" placeholder="姓名" class="on" />
-				<input type="text" placeholder="手机号" />
+			<form th:action="@{save}" method="get">
+				<input type="text" placeholder="姓名" class="on" name="name"/>
+				<input type="text" placeholder="手机号" name="phone"/>
 				<div class="city">
-					<select name="">
-						<option value="省份/自治区">省份/自治区</option>
+					<select name="province.id">
+						<option th:value="0" >省份/自治区</option>
+						<option th:each="p:${province}" th:value="${p.id}" 
+						th:text="${p.name}" th:selected="${provinceId==p.id}"></option>
 					</select>
-					<select>
-						<option value="城市/地区">城市/地区</option>
+					<select name="city.id">
+						<option th:value="0">城市/地区</option>
+						<option th:each="city:${city}" th:value="${city.id}" 
+						th:text="${city.name}" th:selected="${cityId==city.id}"></option>
 					</select>
-					<select>
-						<option value="区/县">区/县</option>
+					<select name="county.id">
+						<option th:value="0">区/县</option>
+						<option th:each="c:${county}" th:value="${c.id}" 
+						th:text="${c.name}" th:selected="${countyId==c.id}"></option>
 					</select>
-					<select>
-						<option value="配送区域">配送区域</option>
+					<select name="region.id">
+						<option th:value="0">配送区域</option>
+						<option th:each="r:${region}" th:value="${r.id}" 
+						th:text="${r.name}" th:selected="${regionId==r.id}"></option>
 					</select>
 				</div>
-				<textarea name="" rows="" cols="" placeholder="详细地址"></textarea>
-				<input type="text" placeholder="邮政编码" />
+				<textarea rows="" cols="" placeholder="详细地址" name="detailSite"></textarea>
+				<input type="text" placeholder="邮政编码" name="postcode"/>
 				<div class="bc">
-					<input type="button" value="保存" />
+					<input type="submit" value="保存" />
 					<input type="button" value="取消" />
 				</div>
 			</form>
 		</div>
 		<div class="readd">
-			<form action="#" method="get">
-				<input type="text"  class="on" value="六六六" />
-				<input type="text" value="157****0022" />
+			<form th:action="@{update}" method="get" th:each="add:${add}">
+				<input type="text"  th:value="${add.name}" name="name" class="on"/>
+				<input type="text" th:value="${add.phone}" name="phone"/>
 				<div class="city">
-					<select name="">
-						<option value="省份/自治区">河北省</option>
+					<select name="province.id">
+						<option th:value="0" >省份/自治区</option>
+						<option th:each="p:${province}" th:value="${p.id}" 
+						th:text="${p.name}" th:selected="${provinceId==p.id}"></option>
 					</select>
-					<select>
-						<option value="城市/地区">唐山市</option>
+					<select name="city.id">
+						<option th:value="0">城市/地区</option>
+						<option th:each="city:${city}" th:value="${city.id}" 
+						th:text="${city.name}" th:selected="${cityId==city.id}"></option>
 					</select>
-					<select>
-						<option value="区/县">路北区</option>
+					<select name="county.id">
+						<option th:value="0">区/县</option>
+						<option th:each="c:${county}" th:value="${c.id}" 
+						th:text="${c.name}" th:selected="${countyId==c.id}"></option>
 					</select>
-					<select>
-						<option value="配送区域">火炬路</option>
+					<select name="region.id">
+						<option th:value="0">配送区域</option>
+						<option th:each="r:${region}" th:value="${r.id}" 
+						th:text="${r.name}" th:selected="${regionId==r.id}"></option>
 					</select>
 				</div>
-				<textarea name="" rows="" cols="" placeholder="详细地址">高新产业园</textarea>
-				<input type="text" placeholder="邮政编码" value="063000"/>
+				<textarea name="detailSite" rows="" cols="" placeholder="详细地址" th:text="${add.detailSite}">高新产业园</textarea>
+				<input type="text" placeholder="邮政编码" th:value="${add.postcode}" name="postcode"/>
 				<div class="bc">
 					<input type="button" value="保存" />
 					<input type="button" value="取消" />

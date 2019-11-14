@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzq.dao.AddressDao">
+	<resultMap type="Address" id="addressMap">
+		<id column="id" property="id"/>
+		<id column="name" property="name"/>
+		<id column="phone" property="phone"/>
+		<id column="detailSite" property="detailSite"/>
+		<id column="postcode" property="postcode"/>
+		<association property="province" column="provinceId"
+			select="com.zzq.dao.ProvinceDao.findById">
+		</association>
+		<association property="city" column="cityId"
+			select="com.zzq.dao.CityDao.findById">
+		</association>
+		<association property="county" column="countyId"
+			select="com.zzq.dao.CountyDao.findById">
+		</association>
+		<association property="region" column="regionId"
+			select="com.zzq.dao.RegionDao.findById">
+		</association>
+	</resultMap>
+	<select id="find"  resultMap="addressMap">
+		select * from address 
+	</select>
+	<select id="findById" parameterType="int" resultMap="addressMap">
+		select * from address where id=#{id}
+	</select>
+	<insert id="add" parameterType="map">
+		insert into address values(null,#{name},#{phone},#{province.id},#{city.id},#{county.id},#{region.id},#{detailSite},#{postcode})
+	</insert>
+	<update id="update" parameterType="Address">
+		update address 
+		<set>
+			<if test="name!=null">
+				name=#{name},
+			</if>
+			<if test="phone!=null">
+				phone=#{phone},
+			</if>
+			<if test="province!=null">
+				provinceId=#{province.id},
+			</if>
+			<if test="city!=null">
+				cityId=#{city.id},
+			</if>
+			<if test="county!=null">
+				county=#{county.id},
+			</if>
+			<if test="region!=null">
+				region=#{region.id},
+			</if>
+			<if test="detailSite!=null">
+				detailSite=#{detailSite},
+			</if>
+			<if test="postcode!=null">
+				postcode=#{postcode},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+</mapper> 
